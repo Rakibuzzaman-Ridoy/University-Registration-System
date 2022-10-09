@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @push('title')
-    <title>Department Insert Form!</title>   
+    @if(isset($dataupdate))
+        <title>Department Update Form!</title>  
+    @else
+        <title>Department Insert Form!</title>  
+    @endif
+     
 @endpush
 @section('main-section')
 <div class="content-wrapper">

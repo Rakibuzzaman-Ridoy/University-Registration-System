@@ -77,6 +77,7 @@
 <script src="{{asset('backend')}}/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="{{asset('backend')}}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('backend')}}/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
@@ -86,6 +87,7 @@
 <script type="text/javascript" src="{{ asset('backend/plugins/toastr/toastr.min.js')}}"></script>
 {{-- Sweet Alert Cdn --}}
 <script src="https://unpkg.com/sweetalert2@7.19.1/dist/sweetalert2.all.js"></script>
+{{-- jQuery Validation CDN --}}
 
 
 <script type="text/javascript">

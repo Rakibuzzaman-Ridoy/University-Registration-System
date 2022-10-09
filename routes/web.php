@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\logoutController;
 use App\Http\Controllers\backend\semester\semesterController;
 use App\Http\Controllers\backend\department\departmentController;
+use App\Http\Controllers\backend\paymentCategory\paymentCategoryController;
+use App\Http\Controllers\backend\paymentAmount\paymentAmountController;
+
 
 
 
@@ -53,6 +56,27 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('/departmentDataUpdate/{id}',[departmentController::class,'departmentDataUpdate'])->name('departmentDataUpdate');
     Route::post('/departmentDataEdit/{id}',[departmentController::class,'departmentDataEdit'])->name('departmentDataEdit');
     Route::get('/departmentDataDelete/{id}',[departmentController::class,'departmentDataDelete'])->name('departmentDataDelete');
+});
+//Payment Category
+Route::group(['middleware'=>'auth'],function(){
+    //Creating payment category
+    Route::get('/paymentCategoryFormOpen',[paymentCategoryController::class,'paymentCategoryFormOpen'])->name('paymentCategoryFormOpen');
+    Route::post('/paymentCategoryDataInsert',[paymentCategoryController::class,'paymentCategoryDataInsert'])->name('paymentCategoryDataInsert');
+    Route::get('/paymentCategoryDataShow',[paymentCategoryController::class,'paymentCategoryDataShow'])->name('paymentCategoryDataShow');
+    Route::get('/paymentCategoryDataUpdate/{id}',[paymentCategoryController::class,'paymentCategoryDataUpdate'])->name('paymentCategoryDataUpdate');
+    Route::post('/paymentCategoryDataEdit/{id}',[paymentCategoryController::class,'paymentCategoryDataEdit'])->name('paymentCategoryDataEdit');
+    Route::get('/paymentCategoryDataDelete/{id}',[paymentCategoryController::class,'paymentCategoryDataDelete'])->name('paymentCategoryDataDelete');
+});
+
+//Payment Amount
+Route::group(['middleware'=>'auth'],function(){
+    //Creating payment Amount
+    Route::get('/paymentAmountFormOpen',[paymentAmountController::class,'paymentAmountFormOpen'])->name('paymentAmountFormOpen');
+    Route::post('/paymentAmountDataInsert',[paymentAmountController::class,'paymentAmountDataInsert'])->name('paymentAmountDataInsert');
+    Route::get('/paymentAmountDataShow',[paymentAmountController::class,'paymentAmountDataShow'])->name('paymentAmountDataShow');
+    Route::get('/paymentAmountDataUpdate/{id}',[paymentAmountController::class,'paymentAmountDataUpdate'])->name('paymentAmountDataUpdate');
+    Route::post('/paymentAmountDataEdit/{id}',[paymentAmountController::class,'paymentAmountDataEdit'])->name('paymentAmountDataEdit');
+    Route::get('/paymentAmountDataDelete/{id}',[paymentAmountController::class,'paymentAmountDataDelete'])->name('paymentAmountDataDelete');
 });
 
 

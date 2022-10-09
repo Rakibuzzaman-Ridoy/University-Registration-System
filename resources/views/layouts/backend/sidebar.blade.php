@@ -36,23 +36,35 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
-              <i class="fa-solid fa-house"></i>
+              <i class="fa-brands fa-meetup"></i>
               <p>
                 Manage Setup
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('semesterFormOpen') }}" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fa-solid fa-book"></i>
                   <p>Semester</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('departmentFormOpen') }}" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  {{-- <i class="far fa-circle nav-icon"></i> --}}
+                  <i class="fas fa-home"></i>
                   <p>Department</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('paymentCategoryFormOpen') }}" class="nav-link active">
+                  <i class="fa fa-dollar" aria-hidden="true"></i>
+                  <p>Payment Category</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('paymentAmountFormOpen') }}" class="nav-link active">
+                  <i class="fa-regular fa-money-bill-1"></i>
+                  <p>Payment Amount</p>
                 </a>
               </li>
             </ul>
