@@ -6,6 +6,9 @@ use App\Http\Controllers\backend\semester\semesterController;
 use App\Http\Controllers\backend\department\departmentController;
 use App\Http\Controllers\backend\paymentCategory\paymentCategoryController;
 use App\Http\Controllers\backend\paymentAmount\paymentAmountController;
+use App\Http\Controllers\backend\course\courseController;
+use App\Http\Controllers\backend\credit\creditController;
+use App\Http\Controllers\backend\teacher\teacherController;
 
 
 
@@ -74,9 +77,42 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('/paymentAmountFormOpen',[paymentAmountController::class,'paymentAmountFormOpen'])->name('paymentAmountFormOpen');
     Route::post('/paymentAmountDataInsert',[paymentAmountController::class,'paymentAmountDataInsert'])->name('paymentAmountDataInsert');
     Route::get('/paymentAmountDataShow',[paymentAmountController::class,'paymentAmountDataShow'])->name('paymentAmountDataShow');
-    Route::get('/paymentAmountDataUpdate/{id}',[paymentAmountController::class,'paymentAmountDataUpdate'])->name('paymentAmountDataUpdate');
-    Route::post('/paymentAmountDataEdit/{id}',[paymentAmountController::class,'paymentAmountDataEdit'])->name('paymentAmountDataEdit');
-    Route::get('/paymentAmountDataDelete/{id}',[paymentAmountController::class,'paymentAmountDataDelete'])->name('paymentAmountDataDelete');
+    Route::get('/paymentAmountDataUpdate/{paymentCategory_id}',[paymentAmountController::class,'paymentAmountDataUpdate'])->name('paymentAmountDataUpdate');
+    Route::post('/paymentAmountDataEdit/{paymentCategory_id}',[paymentAmountController::class,'paymentAmountDataEdit'])->name('paymentAmountDataEdit');
+    //Route::get('/paymentAmountDataDelete/{id}',[paymentAmountController::class,'paymentAmountDataDelete'])->name('paymentAmountDataDelete');
+    Route::get('/paymentAmountDataShowDetails/{paymentCategory_id}',[paymentAmountController::class,'paymentAmountDataShowDetails'])->name('paymentAmountDataShowDetails');
+});
+//Creating Course
+Route::group(['middleware'=>'auth'],function(){
+    //Creating Course
+    Route::get('/courseFormOpen',[courseController::class,'courseFormOpen'])->name('courseFormOpen');
+    Route::post('/courseDataInsert',[courseController::class,'courseDataInsert'])->name('courseDataInsert');
+    Route::get('/courseDataShow',[courseController::class,'courseDataShow'])->name('courseDataShow');
+    Route::get('/courseDataUpdate/{id}',[courseController::class,'courseDataUpdate'])->name('courseDataUpdate');
+    Route::post('/courseDataEdit/{id}',[courseController::class,'courseDataEdit'])->name('courseDataEdit');
+    Route::get('/courseDataDelete/{id}',[courseController::class,'courseDataDelete'])->name('courseDataDelete');
+});
+
+//Creating Credit
+Route::group(['middleware'=>'auth'],function(){
+    //Creating Credit
+    Route::get('/creditFormOpen',[creditController::class,'creditFormOpen'])->name('creditFormOpen');
+    Route::post('/creditDataInsert',[creditController::class,'creditDataInsert'])->name('creditDataInsert');
+    Route::get('/creditDataShow',[creditController::class,'creditDataShow'])->name('creditDataShow');
+    Route::get('/creditDataUpdate/{id}',[creditController::class,'creditDataUpdate'])->name('creditDataUpdate');
+    Route::post('/creditDataEdit/{id}',[creditController::class,'creditDataEdit'])->name('creditDataEdit');
+    Route::get('/creditDataDelete/{id}',[creditController::class,'creditDataDelete'])->name('creditDataDelete');
+});
+
+//Creating Teacher
+Route::group(['middleware'=>'auth'],function(){
+    //Creating Teacher
+    Route::get('/teacherFormOpen',[teacherController::class,'teacherFormOpen'])->name('teacherFormOpen');
+    Route::post('/teacherDataInsert',[teacherController::class,'teacherDataInsert'])->name('teacherDataInsert');
+    Route::get('/teacherDataShow',[teacherController::class,'teacherDataShow'])->name('teacherDataShow');
+    Route::get('/teacherDataUpdate/{id}',[teacherController::class,'teacherDataUpdate'])->name('teacherDataUpdate');
+    Route::post('/teacherDataEdit/{id}',[teacherController::class,'teacherDataEdit'])->name('teacherDataEdit');
+    Route::get('/teacherDataDelete/{id}',[teacherController::class,'teacherDataDelete'])->name('teacherDataDelete');
 });
 
 

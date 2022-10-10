@@ -67,6 +67,24 @@
                   <p>Payment Amount</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('courseFormOpen') }}" class="nav-link active">
+                  <i class="fa-solid fa-book"></i>
+                  <p>Courses</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('teacherFormOpen') }}" class="nav-link active">
+                  <i class="fa-solid fa-person"></i>
+                  <p>Teacher</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('creditFormOpen') }}" class="nav-link active">
+                  <i class="fa-solid fa-pen-clip"></i>
+                  <p>Credit</p>
+                </a>
+              </li>
             </ul>
           </li>
          

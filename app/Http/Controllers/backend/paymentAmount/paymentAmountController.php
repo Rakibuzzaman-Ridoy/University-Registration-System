@@ -32,23 +32,45 @@ class paymentAmountController extends Controller
             "amount"=>"required",
 
         ]);
-       $data[]=[];
-       for($i = 0; $i<count($request->semester_id); $i++){
-        $data[$i]=[
-                'department_id'=> $request['department_id'],
-                'semester_id'=> $request->semester_id[$i],
-               'paymentCategory_id'=> $request['paymentCategory_id'],
-                'amount' => $request->amount[$i],
-        ];
-       }
-       for($i = 0; $i<count($request->semester_id); $i++){
-        $payment=PaymentAmount::create( $data[$i]);
+    //    $data[]=[];
+    //    for($i = 0; $i<count($request->semester_id); $i++){
+    //     $data[$i]=[
+    //             'department_id'=> $request['department_id'],
+    //             'semester_id'=> $request->semester_id[$i],
+    //            'paymentCategory_id'=> $request['paymentCategory_id'],
+    //             'amount' => $request->amount[$i],
+    //     ];
+    //    }
+    //    for($i = 0; $i<count($request->semester_id); $i++){
+    //     $payment=PaymentAmount::create( $data[$i]);
       
-       }
-       if(!empty($payment)){
-        $notification = array("message"=>"Data Inserted Successfully!","alert-type"=>"success");
-        return redirect('/paymentAmountDataShow')->with($notification);
-       }
+    //    }
+    //    if(!empty($payment)){
+    //     $notification = array("message"=>"Data Inserted Successfully!","alert-type"=>"success");
+    //     return redirect('/paymentAmountDataShow')->with($notification);
+    //    }
+    // printResult(count($request->amount));
+    // die;
+        $data[] = [];
+        for($i=0; $i<count($request->amount); $i++)
+        {
+            $data[$i] = [
+                'department_id'=>$request->department_id,
+                'semester_id'=>$request->semester_id[$i],
+                'paymentCategory_id'=>$request->paymentCategory_id,
+                'amount'=>$request->amount[$i],
+            ];
+        }
+
+        for($i=0; $i<count($request->amount); $i++)
+        {
+            $payment = PaymentAmount::create($data[$i]);
+        }
+        if(!empty($payment))
+        {
+            $notification = array("message"=>"Data Inserted Successfully!","alert-type"=>"success");
+            return redirect('/paymentAmountDataShow')->with($notification);
+        }
       
     }
 
@@ -61,29 +83,57 @@ class paymentAmountController extends Controller
 
         }else
         {
-             $paymentAmount = PaymentAmount::simplePaginate(5); 
+            //  $paymentAmount = PaymentAmount::simplePaginate(5); 
+            $paymentAmount = PaymentAmount::select('paymentCategory_id')->groupby('paymentCategory_id')->simplePaginate(5); 
         }
         $data = compact('paymentAmount','search');
         return view('paymentAmount/paymentAmountDataShow')->with($data);
     }
 
 
-    public function paymentAmountDataUpdate($id)
+    public function paymentAmountDataUpdate($paymentCategory_id)
     {
-        $ids = Crypt::decryptString($id);
-        $dataupdate = PaymentAmount::find($ids);
-        $data = compact('dataupdate');
-        return view('paymentAmount/paymentAmountFormOpen')->with($data);
+        $ids = Crypt::decryptString($paymentCategory_id);
+        $dataupdate = PaymentAmount::where('paymentCategory_id',$ids)->get();
+        $paymentCategory = PaymentCategory::all();
+        $department = Department::all();
+        $semester   = Semester::all();
+        $data = compact('dataupdate','department','semester','paymentCategory');
+        return view('paymentAmount/paymentAmountDataUpdate')->with($data);
 
     }
 
-    public function paymentAmountDataEdit(Request $request, $id)
+    public function paymentAmountDataEdit(Request $request, $paymentCategory_id)
     {
-        $paymentAmount = PaymentAmount::find($id);
-        $paymentAmount->amount = $request->paymentAmount;
-        $paymentAmount->save();
-        $notification = array("message"=>"Data Updated Successfully!","alert-type"=>"success");
-        return redirect('/paymentAmountDataShow')->with($notification);
+        if(!empty($request->semester_id && $request->amount))
+        {
+            PaymentAmount::where('paymentCategory_id',$paymentCategory_id)->delete();
+            $data[] = [];
+            for($i=0; $i<count($request->amount); $i++)
+            {
+                $data[$i] = [
+                    'department_id'=>$request->department_id,
+                    'semester_id'=>$request->semester_id[$i],
+                    'paymentCategory_id'=>$request->paymentCategory_id,
+                    'amount'=>$request->amount[$i],
+                ];
+            }
+
+            for($i=0; $i<count($request->amount); $i++)
+            {
+                $payment = PaymentAmount::create($data[$i]);
+            }
+            if(!empty($payment))
+            {
+                $notification = array("message"=>"Data updated Successfully!","alert-type"=>"success");
+                return redirect('/paymentAmountDataShow')->with($notification);
+            }
+        }
+        else
+        {
+            $notification = array("message"=>"Failed to update data!","alert-type"=>"error");
+            return redirect()->back()->with($notification);
+        }
     }
 
     public function paymentAmountDataDelete(Request $request, $id)
@@ -98,5 +148,18 @@ class paymentAmountController extends Controller
             $notification = array('message' => 'Failed to Delete!!', 'alert-type' => 'error');
             return redirect()->back()->with($notification);
         }
+    }
+
+    public function paymentAmountDataShowDetails($paymentCategory_id)
+    {
+        //dd('ok');
+        $ids = Crypt::decryptString($paymentCategory_id);
+        $dataupdate = PaymentAmount::where('paymentCategory_id',$ids)->get();
+        $paymentCategory = PaymentCategory::all();
+        $department = Department::all();
+        $semester   = Semester::all();
+        $data = compact('dataupdate','department','semester','paymentCategory');
+        return view('paymentAmount/paymentAmountDataDetails')->with($data);
+
     }
 }
