@@ -33,7 +33,7 @@
               <div class="card">
                 <div class="card-header">
                   {{-- Search --}}
-                    <div class="row mb-2">
+                    <div class="row mb-2 bg-success" style="padding-top: 20px;">
                         <div class="col-md-6">
                           <h4>This table show's all the available Courses</h4>
                         </div>
@@ -62,21 +62,29 @@
                         <tr>
                         <th class="text-center">Serial</th>
                         <th class="text-center">Course Name</th>
+                        <th class="text-center">Course Code</th>
+                        <th class="text-center">Credit</th>
+                        <th class="text-center">Cost</th>
+                        <th class="text-center">Teacher</th>
                         <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($course as $dept)
+                        @foreach($course as $cor)
                         <tr>
                             <td class="text-center">{{$loop->iteration}}</td>
-                            <td class="text-center">{{$dept->course_name}}</td>
+                            <td class="text-center">{{$cor->course_name}}</td>
+                            <td class="text-center">{{$cor->course_code}}</td>
+                            <td class="text-center">{{$cor['credit_info']['credit_point']}}</td>
+                            <td class="text-center">{{$cor['credit_info']['credit_cost']}}</td>   
+                            <td class="text-center">{{$cor->teacher_info->teacher_name}}</td>
                             <td class="text-center">
-                                <a href="{{ route('courseDataUpdate',Crypt::encryptString($dept->course_id))}}" class="text-decoration-none">
+                                <a href="{{ route('courseDataUpdate',Crypt::encryptString($cor->course_id))}}" class="text-decoration-none">
                                     <button class="btn btn-primary">
                                       <i class="fa-solid fa-pen-to-square"></i>
                                     </button>
                                 </a>
-                                <a href="{{ route('courseDataDelete',Crypt::encryptString($dept->course_id)) }}" class="text-decoration-none delete">
+                                <a href="{{ route('courseDataDelete',Crypt::encryptString($cor->course_id)) }}" class="text-decoration-none delete">
                               
                                     <button class="btn btn-danger">
                                       <i class="fa-solid fa-trash"></i>

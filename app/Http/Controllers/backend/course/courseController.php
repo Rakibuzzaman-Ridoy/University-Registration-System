@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\backend\course;
-
+use App\Models\Teacher;
+use App\Models\Credit;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -12,7 +13,10 @@ class courseController extends Controller
 {
     public function courseFormOpen()
     {
-        return view('course/courseFormOpen');
+        $teacher = Teacher::all();
+        $credit  = Credit::all();
+        $data = compact('teacher','credit');
+        return view('course/courseFormOpen')->with($data);
     }
 
     public function courseDataInsert(Request $request)
@@ -20,11 +24,17 @@ class courseController extends Controller
     //    printResult($request->all());
     //    die;
         $request->validate([
-            "course"=>"required|unique:courses,course_name",
+            "course_name"=>"required|unique:courses,course_name",
+            "course_code"=>"required|unique:courses,course_code",
+            "credit_id"=>"required",
+            "teacher_id"=>"required",
         ]);
 
         $course = new Course;
-        $course->course_name	 = $request['course'];
+        $course->course_name	 = $request['course_name'];
+        $course->course_code     = $request->course_code;
+        $course->credit_id       = $request->credit_id;
+        $course->teacher_id      = $request->teacher_id;
         $course->save();
         $notification = array("message"=>"Data Inserted!","alert-type"=>"success");
         return redirect('/courseDataShow')->with($notification);
@@ -50,15 +60,20 @@ class courseController extends Controller
     {
         $ids = Crypt::decryptString($id);
         $dataupdate = Course::find($ids);
-        $data = compact('dataupdate');
-        return view('course/courseFormOpen')->with($data);
+        $credit = Credit::all();
+        $teacher = Teacher::all();
+        $data = compact('dataupdate','credit','teacher');
+        return view('course/courseDataUpdate')->with($data);
 
     }
 
     public function courseDataEdit(Request $request, $id)
     {
         $course = Course::find($id);
-        $course->course_name = $request->course;
+        $course->course_name = $request->course_name;
+        $course->course_code     = $request->course_code;
+        $course->credit_id       = $request->credit_id;
+        $course->teacher_id      = $request->teacher_id;
         $course->save();
         $notification = array("message"=>"Data Updated!","alert-type"=>"success");
         return redirect('/courseDataShow')->with($notification);

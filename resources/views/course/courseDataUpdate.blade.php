@@ -1,11 +1,6 @@
 @extends('layouts.app')
 @push('title')
-    @if(isset($dataupdate)) 
-        <title>Course Update Form!</title>
-    @else
-        <title>Course Insert Form!</title>  
-    @endif
-     
+        <title>Course Update Form!</title>     
 @endpush
 @section('main-section')
 <div class="content-wrapper">
@@ -14,11 +9,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        @if(isset($dataupdate))
                             <h1>Course Data Update!</h1>
-                        @else
-                            <h1>Course Data Insert</h1>
-                        @endif
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -53,13 +44,13 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ route('courseDataInsert') }}" method="POST">
+                        <form role="form" action="{{ route('courseDataEdit',$dataupdate->course_id) }}" method="POST">
                             @csrf
                             <div class="card-body">
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="exampleInputEmail1">Course Name</label>
-                                            <input type="text" name="course_name" class="form-control" value="{{ @$dataupdate->course_name}}" 
+                                            <input type="text" name="course_name" class="form-control" value="{{$dataupdate->course_name}}" 
                                                 id="exampleInputEmail1" placeholder="Enter Course Name">
                                             <span class="text-danger font-weight-bold">
                                                 @error('course_name')
@@ -70,7 +61,7 @@
     
                                         <div class="form-group col-md-6">
                                             <label for="exampleInputEmail1">Course Code</label>
-                                            <input type="text" name="course_code" class="form-control" value="{{ @$dataupdate->course_code}}" 
+                                            <input type="text" name="course_code" class="form-control" value="{{ $dataupdate->course_code }}" 
                                                 id="exampleInputEmail1" placeholder="Enter Course Code">
                                             <span class="text-danger font-weight-bold">
                                                 @error('course_code')
@@ -85,7 +76,8 @@
                                             <select name="credit_id" id="credit_id" class="form-control" >
                                                 <option value="" >Credit Point</option>
                                                     @foreach($credit as $cre)
-                                                        <option value="{{ $cre->credit_id }}">{{ $cre->credit_point }}
+                                                        <option value="{{ $cre->credit_id }}" {{$dataupdate->credit_id==$cre->credit_id?"selected":""}}>                                                           
+                                                            {{ $cre->credit_point }}
                                                         </option>
                                                     @endforeach
                                             </select>
@@ -101,7 +93,7 @@
                                             <select name="teacher_id" id="teacher_id" class="form-control" >
                                                 <option value="">Select Teacher</option>
                                                 @foreach ($teacher as $teachers)
-                                                    <option value="{{ $teachers->teacher_id }}">{{ $teachers->teacher_name }}</option>
+                                                    <option value="{{ $teachers->teacher_id }}" {{$dataupdate->teacher_id==$teachers->teacher_id?"selected":""}}>{{ $teachers->teacher_name }}</option>
                                                 @endforeach
                                             </select>
                                             <span class="text-danger font-weight-bold">

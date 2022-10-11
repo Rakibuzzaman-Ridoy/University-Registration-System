@@ -95,6 +95,7 @@ class paymentAmountController extends Controller
     {
         $ids = Crypt::decryptString($paymentCategory_id);
         $dataupdate = PaymentAmount::where('paymentCategory_id',$ids)->get();
+        //dd($dataupdate->toArray());
         $paymentCategory = PaymentCategory::all();
         $department = Department::all();
         $semester   = Semester::all();
