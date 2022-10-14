@@ -15,7 +15,7 @@ class logoutController extends Controller
     
         $request->session()->regenerateToken();
     
-        return redirect('/');
+        return redirect('/login');
     }
 
     public function passwordChangeFormOpen()

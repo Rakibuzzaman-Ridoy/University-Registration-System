@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="#" class="brand-link float-start">
       <img src="{{asset('backend')}}/dist/img/UMSDIU.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text text-light fw-bold">University Registration System</span>
+      <h6 class="brand-text text-light fw-bold">DIU Registration System</h6>
     </a>
 
     <!-- Sidebar -->
@@ -38,7 +38,7 @@
             <a href="#" class="nav-link active">
               <i class="fa-brands fa-meetup"></i>
               <p>
-                Manage Setup
+                Admin's Job
               </p>
             </a>
             <ul class="nav nav-treeview">

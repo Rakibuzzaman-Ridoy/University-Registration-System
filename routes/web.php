@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\frontend\PayableAmount\studentPaymentAmountView;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\logoutController;
 use App\Http\Controllers\backend\semester\semesterController;
@@ -9,9 +10,9 @@ use App\Http\Controllers\backend\paymentAmount\paymentAmountController;
 use App\Http\Controllers\backend\course\courseController;
 use App\Http\Controllers\backend\credit\creditController;
 use App\Http\Controllers\backend\teacher\teacherController;
-
-
-
+use App\Http\Controllers\frontend\courses\courseControllers as CoursesCourseControllers;
+use App\Http\Controllers\frontend\student\StudentController;
+use App\Http\Controllers\frontend\teachers\teacherControllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,10 @@ use App\Http\Controllers\backend\teacher\teacherController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/dashboardOpen',function(){
+    return view('layouts.frontend.app');
+})->name('studentDashboard')->middleware('student_auth');
+//Route::get('/dashboardOpen',[StudentController::class,'dashboardOpen'])->name('dashboardOpen')->middleware('student_auth');
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,6 +37,53 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+/*==========================================Student=================================================*/
+//Registration and Login
+
+Route::group(["prefix"=>"student"],function(){
+    Route::get('/studentRegisterFormOpen', [StudentController::class,'studentRegisterFormOpen'])->name('studentRegisterFormOpen')
+            ->middleware('student_guard');
+
+    Route::post('/studentRegisterFormSubmit', [StudentController::class,'studentRegisterFormSubmit'])->name('studentRegisterFormSubmit');
+    Route::get('/studentLoginFormOpen', [StudentController::class,'studentLoginFormOpen'])
+            ->name('studentLoginFormOpen')->middleware('student_guard');
+
+    Route::post('/studentLoginFormSubmit', [StudentController::class,'studentLoginFormSubmit'])->name('studentLoginFormSubmit');
+    Route::get('/studentLogout', [StudentController::class,'studentLogout'])
+                ->name('studentLogout')->middleware('student_auth');
+
+    Route::get('/passwordChangeFormOpen', [StudentController::class,'passwordChangeFormOpen'])
+    ->name('PasswordChangeFormOpen')->middleware('student_auth');
+
+    Route::post('/passwordChangeFormSubmit', [StudentController::class,'passwordChangeFormSubmit'])
+    ->name('PasswordChangeFormSubmit')->middleware('student_auth');
+});
+
+
+//Payment Amount
+Route::group(['middleware'=>'student_auth'],function(){
+    Route::get('/studentPaymentAmountDataShow',[studentPaymentAmountView::class,'studentPaymentAmountDataShow'])->name('studentPaymentAmountDataShow');
+    Route::get('/studentPaymentAmountDataShowDetails/{paymentCategory_id}',[studentPaymentAmountView::class,'studentPaymentAmountDataShowDetails'])->name('studentPaymentAmountDataShowDetails');
+});    
+
+//Student Courses Info
+Route::group(['middleware'=>'student_auth'],function(){
+    Route::get('/studentCourseDataShow',[CoursesCourseControllers::class,'studentCourseDataShow'])->name('studentCourseDataShow');
+});  
+
+//Student viewing Teacher's Data
+Route::group(['middleware'=>'student_auth'],function(){
+    Route::get('/studenTteacherDataShow',[teacherControllers::class,'studenTteacherDataShow'])->name('studenTteacherDataShow');
+});  
+
+   
+
+/*==========================================End Student=================================================*/
+
+
+
+/*======================================Admin================================================*/
 //Logout & Chnage Password!
 Route::group(['middleware'=>'auth'],function(){
     Route::get('logout',[logoutController::class,'logout'])->name('logout');
@@ -114,6 +166,10 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('/teacherDataEdit/{id}',[teacherController::class,'teacherDataEdit'])->name('teacherDataEdit');
     Route::get('/teacherDataDelete/{id}',[teacherController::class,'teacherDataDelete'])->name('teacherDataDelete');
 });
+
+
+/*======================================End Admin================================================*/
+
 
 
 

@@ -34,10 +34,10 @@
                 <div class="card-header bg-success">
                   {{-- Search --}}
                     <div class="row mb-2">
-                        <div class="col-md-6">
+                        <div class="col-md-6" style="padding-top: 15px;">
                           <h4>This table show's all the available Teacher Info</h4>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6" style="padding-top: 15px;">
                           <form action="" method="GET">
                               <div class="row">
                                   <div class="form-group col-md-8">

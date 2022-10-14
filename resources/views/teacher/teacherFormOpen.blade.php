@@ -56,49 +56,62 @@
                         <!-- form start -->
                         <form role="form" action="{{ (@$dataupdate)?route('teacherDataEdit',$dataupdate->teacher_id):route('teacherDataInsert') }}" method="Post">
                             @csrf
-                            <div class="card-body col-md-8 offset-2">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Teacher's Name</label>
-                                        <input type="text" name="teacher_name" class="form-control" value="{{ @$dataupdate->teacher_name}}" 
-                                            id="exampleInputEmail1" placeholder="Enter Teacher Name">
-                                        <span class="text-danger">
-                                            @error('teacher_name')
-                                                {{$message}}
-                                            @enderror
-                                        </span>
+                            <section class="bg-light">
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Teacher's Name</label>
+                                            <input type="text" name="teacher_name" class="form-control" value="{{ @$dataupdate->teacher_name}}" 
+                                                id="exampleInputEmail1" placeholder="Enter Teacher Name">
+                                            <span class="text-danger">
+                                                @error('teacher_name')
+                                                    {{$message}}
+                                                @enderror
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Email</label>
-                                        <input type="email" name="email" class="form-control" value="{{ @$dataupdate->email}}" 
-                                            id="exampleInputEmail1" placeholder="Enter Email">
-                                        <span class="text-danger">
-                                            @error('email')
-                                                {{$message}}
-                                            @enderror
-                                        </span>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Email</label>
+                                            <input type="email" name="email" class="form-control" value="{{ @$dataupdate->email}}" 
+                                                id="exampleInputEmail1" placeholder="Enter Email">
+                                            <span class="text-danger">
+                                                @error('email')
+                                                    {{$message}}
+                                                @enderror
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Phone</label>
-                                        <input type="number" name="phone" class="form-control" value="{{ @$dataupdate->phone}}" 
-                                            id="exampleInputEmail1" placeholder="Enter Phone Number">
-                                        <span class="text-danger">
-                                            @error('phone')
-                                                {{$message}}
-                                            @enderror
-                                        </span>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Phone</label>
+                                            <input type="number" name="phone" class="form-control" value="{{ @$dataupdate->phone}}" 
+                                                id="exampleInputEmail1" placeholder="Enter Phone Number">
+                                            <span class="text-danger">
+                                                @error('phone')
+                                                    {{$message}}
+                                                @enderror
+                                            </span>
+                                        </div>
                                     </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Teaching Area</label>
-                                        <input type="textarea" name="area" class="form-control" value="{{ @$dataupdate->area}}" 
-                                            id="exampleInputEmail1" placeholder="Enter Teaching Area">
-                                        <span class="text-danger">
-                                            @error('area')
-                                                {{$message}}
-                                            @enderror
-                                        </span>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Teaching Area</label>
+                                            <input type="textarea" name="area" class="form-control" value="{{ @$dataupdate->area}}" 
+                                                id="exampleInputEmail1" placeholder="Enter Teaching Area">
+                                            <span class="text-danger">
+                                                @error('area')
+                                                    {{$message}}
+                                                @enderror
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div class="form-check fw-bold">
+                                </div>
+                                 <div class="row">
+                                    <div class="form-check fw-bold col-md-10">
                                         <p class="fw-bold">Select Gender</p>
                                         <input type="radio" name="gender" value="M" {{ (@$dataupdate->gender=="M")? "checked" : "" }}/>
                                         <label>Male</label>
@@ -113,9 +126,9 @@
                                             @enderror
                                         </span>
                                     </div>
-
+                                 </div>
                             <!-- /.card-body -->
-
+                        </section>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">{{ (@$dataupdate)?'Update':'Submit'}}</button>
                             </div>

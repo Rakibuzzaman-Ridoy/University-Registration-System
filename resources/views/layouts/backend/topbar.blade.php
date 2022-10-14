@@ -15,7 +15,7 @@
       <!-- Navbar Search -->
       @if(Auth::check())
             <ul>
-              <i class="fa-regular fa-user float-middle"></i>
+              <i class="fa-regular fa-user float-middle"></i> <b>Login As</b>
               <p><b>{{Auth::user()->name}}</b></p>
             </ul>
       @endif
