@@ -87,26 +87,45 @@
               </li>
             </ul>
           </li>
+         <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="fa-brands fa-meetup"></i>
+              <p>
+                Student Registration
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('regDataShow')}}" class="nav-link active">
+                  <i class="fa-solid fa-request"></i>
+                  <p>Registration Request</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+         
          
                                           {{-- Password Change & Logout --}}
-          <li class="nav-item">
-            <a href="#" class="nav-link active">
-              <i class="fa-solid fa-gears"></i> 
-              <p>Password & Logout</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{route('passwordChangeFormOpen')}}" class="nav-link">
-              <i class="nav-icon far fa-circle text-danger"></i>
-              <p class="text">Password Change</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{route('logout')}}" class="nav-link">
-              <i class="nav-icon far fa-circle text-info"></i>
-              <p>Logout</p>
-            </a>
-          </li>
+              <li class="nav-item menu-open">
+                <a href="#" class="nav-link active">
+                  <i class="fa-solid fa-gears"></i> 
+                  <p>Password & Logout</p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('passwordChangeFormOpen')}}" class="nav-link">
+                      <i class="nav-icon far fa-circle text-danger"></i>
+                      <p class="text">Password Change</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('logout')}}" class="nav-link">
+                      <i class="nav-icon far fa-circle text-info"></i>
+                      <p>Logout</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

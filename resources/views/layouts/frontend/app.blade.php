@@ -29,13 +29,6 @@
    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.37/sweetalert2.css">
   <link rel="stylesheet" type="text/css" href="{{asset('backend/plugins/toastr/toastr.css')}}">
-  <link rel="stylesheet" href="{{asset('frontendStudent')}}/fonts/material-icon/css/material-design-iconic-font.min.css">
-
-    <!-- Main css -->
-    <link rel="stylesheet" href="{{asset('frontendStudent')}}/css/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -45,17 +38,14 @@
     <img class="animation__shake" src="{{asset('backend')}}/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div>
 
-{{-- @auth
     <!-- Navbar -->
-    @include('layouts.backend.topbar')
+    @include('layouts.frontend.topbar')
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
-    @include('layouts.backend.sidebar')
+    @include('layouts.frontend.sidebar')
+    
    <!-- /.Main Sidebar Container -->    
-@endauth --}}
 
-@include('layouts.frontend.topbar')
-@include('layouts.frontend.sidebar')
 @yield('main-section')
 
 
@@ -97,11 +87,12 @@
 <script type="text/javascript" src="{{ asset('backend/plugins/toastr/toastr.min.js')}}"></script>
 {{-- Sweet Alert Cdn --}}
 <script src="https://unpkg.com/sweetalert2@7.19.1/dist/sweetalert2.all.js"></script>
+{{-- jQuery Validation CDN --}}
+{{-- 4 cdn for custom login --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
 integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 <script src="{{asset('frontendStudent')}}/vendor/jquery/jquery.min.js"></script>
 <script src="{{asset('frontendStudent')}}/js/main.js"></script>
-{{-- jQuery Validation CDN --}}
 
 
 <script type="text/javascript">
@@ -201,3 +192,32 @@ integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ
         </div>
     </body>
 </html> --}}
+
+
+
+
+
+
+
+
+{{-- jQuery Validation CDN --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

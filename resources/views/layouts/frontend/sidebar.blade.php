@@ -60,9 +60,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="{{ route('regFormOpen') }}" class="nav-link active">
                   <i class="fa-solid fa-registered"></i>
                   <p class="text-dark">Pre-Registration</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('checkStatusStudent') }}" class="nav-link active">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <p class="text-dark">Registration Status</p>
                 </a>
               </li>
              

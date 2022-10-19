@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PaymentAmount extends Model
+class Registration extends Model
 {
     use HasFactory;
-    protected $table = "payment_amounts";
-    protected $primaryKey = "paymentAmount_id";
-    protected $guarded=['paymentAmount_id'];
+    protected $table = "registrations";
+    protected $primaryKey = "registration_id";
 
-    public function paymentAmount()
+    protected $guarded = ['registration_id'];
+
+    public function student()
     {
-        return $this->belongsTo(PaymentCategory::class,'paymentCategory_id','paymentCategory_id');
-        //return $this->hasMany("App\Models\PaymentCategory","paymentCategory_id","paymentCategory_id");
+        return $this->belongsTo(Student::class,'student_id','id');
     }
 
     public function department()
@@ -27,4 +27,11 @@ class PaymentAmount extends Model
     {
         return $this->belongsTo(Semester::class,'semester_id','semester_id');
     }
+
+     public function course()
+    {
+        return $this->belongsTo(Course::class,'course_id','course_id');
+    }
+
+
 }

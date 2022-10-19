@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\frontend\PayableAmount\studentPaymentAmountView;
+use App\Http\Controllers\frontend\registration\registrationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\logoutController;
 use App\Http\Controllers\backend\semester\semesterController;
@@ -25,7 +26,7 @@ use App\Http\Controllers\frontend\teachers\teacherControllers;
 |
 */
 Route::get('/dashboardOpen',function(){
-    return view('layouts.frontend.app');
+    return view('landing/frontend');
 })->name('studentDashboard')->middleware('student_auth');
 //Route::get('/dashboardOpen',[StudentController::class,'dashboardOpen'])->name('dashboardOpen')->middleware('student_auth');
 
@@ -77,9 +78,39 @@ Route::group(['middleware'=>'student_auth'],function(){
     Route::get('/studenTteacherDataShow',[teacherControllers::class,'studenTteacherDataShow'])->name('studenTteacherDataShow');
 });  
 
-   
+//Pre Registration
+Route::group(['middleware'=>'student_auth'],function(){
+    Route::get('/regFormOpen',[registrationController::class,'regFormOpen'])->name('regFormOpen');
+    Route::post('/regFormSubmit',[registrationController::class,'regFormSubmit'])->name('regFormSubmit');
+    Route::get('/checkStatusStudent',[registrationController::class,'checkStatusStudent'])->name('checkStatusStudent');
+
+});   
+
 
 /*==========================================End Student=================================================*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -165,6 +196,13 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('/teacherDataUpdate/{id}',[teacherController::class,'teacherDataUpdate'])->name('teacherDataUpdate');
     Route::post('/teacherDataEdit/{id}',[teacherController::class,'teacherDataEdit'])->name('teacherDataEdit');
     Route::get('/teacherDataDelete/{id}',[teacherController::class,'teacherDataDelete'])->name('teacherDataDelete');
+});
+
+//Registration Request View
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/regDataShow',[registrationController::class,'regDataShow'])->name('regDataShow');
+    Route::get('/regDataDetails/{student_id}',[registrationController::class,'regDataDetails'])->name('regDataDetails');
+    Route::post('/regStatus',[registrationController::class,'regStatus'])->name('regStatus');
 });
 
 
