@@ -37,7 +37,11 @@
                     <div class="card card-primary">
                         <div class="card-header bg-dark">
                          	{{-- <h5 class="text-dark">Student Name: <b class="text-light">{{Auth::guard('student')->user()->name}}</b></h5> --}}
-                            <h5 class="text-success">Student Name: <b class="text-light">{{$dataupdate[1]['student']['name']}}</b></h5>
+                            <h5 class="text-success">
+                                Student Name: <b class="text-light">{{$dataupdate[1]['student']['name']}}</b>
+                                Department: <b class="text-light">{{$dataupdate['0']['department']->department_name}}</b>
+                                Semester: <b class="text-light">{{$dataupdate['0']['semester']->semester_name}}</b>
+                            </h5>
                         </div>
                         <!-- /.card-header -->
                         <!-- card-body -->

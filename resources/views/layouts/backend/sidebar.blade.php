@@ -98,7 +98,7 @@
               <li class="nav-item">
                 <a href="{{route('regDataShow')}}" class="nav-link active">
                   <i class="fa-solid fa-request"></i>
-                  <p>Registration Request</p>
+                  <p>Student's Reg Request</p>
                 </a>
               </li>
             </ul>

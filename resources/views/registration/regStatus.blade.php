@@ -37,7 +37,19 @@
                     <div class="card card-primary">
                         <div class="card-header bg-dark">
                          	{{-- <h5 class="text-dark">Student Name: <b class="text-light">{{Auth::guard('student')->user()->name}}</b></h5> --}}
-                            <h5 class="text-success">Student Name: <b class="text-light">{{Auth::guard('student')->user()->name}}</b></h5>
+                            <h5 class="text-success">
+                                Student Name: <b class="text-light">{{Auth::guard('student')->user()->name}}</b>
+                                Department: <b class="text-light">{{$registration['0']['department']->department_name}}</b>
+                                Semester: <b class="text-light">{{$registration['0']['semester']->semester_name}}</b>
+                                Semester Fee: <b class="text-light"><?php  $sum=0;?>
+                                                @foreach($registration as $reg)
+                                                <?php  $sum +=  $reg['course']['credit_info']['credit_cost'];?>
+                                                @endforeach
+                                            <?php echo $sum;?>
+                                </b>
+                            </h5>
+
+                            
                         </div>
                         <!-- /.card-header -->
                         <!-- card-body -->
@@ -49,7 +61,8 @@
                                         <th class="text-center">Course Name</th>
                                         <th class="text-center">Course Code</th>
                                         <th class="text-center">Credit Point</th>
-                                        <th class="text-center">Registration Status</th>    
+                                        <th class="text-center">Registration Status</th>
+                                        <th class="text-center">Amount</th>  
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -74,7 +87,8 @@
                                                     Rejected
                                                 </button>
                                             @endif
-                                        </td>  
+                                        </td>
+                                        <td class="text-center">{{$reg['course']['credit_info']['credit_cost']}}</td>  
                                     </tr>
                                     @endforeach
                                 </tbody>                              

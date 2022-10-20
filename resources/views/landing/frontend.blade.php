@@ -1,6 +1,6 @@
 @extends('layouts.frontend.app')
 @push('title')
-        <title>Landing FEnd!!</title>   
+        <title>University Registration System!</title>   
 @endpush
 @section('main-section')
 <div class="content-wrapper">
@@ -119,7 +119,14 @@
    <!-- /.row -->
 </div>
                                             
-<footer class="main-footer">
-<strong>Copyright &copy;  <a href="#"><b>Rakibuzzaman Rid</b></a>.</strong> All rights reserved.
-</footer>
+<div class="row">
+  <div class="col-md-4">
+    
+  </div>
+  <div class="col-md-8">
+    <footer class="main-footer">
+      <strong>Copyright &copy;  <a href="#" class="text-dark"><b>Rakibuzzaman Rid</b></a>.</strong> All rights reserved.
+      </footer>
+  </div>
+</div>
 @endsection
