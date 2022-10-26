@@ -20,8 +20,17 @@ class registrationController extends Controller
     public function checkStatusStudent()
     {
         $registration = Registration::where('student_id',Auth::guard('student')->user()->id)->get();
+        // $checkStat = Registration::all();
         $data = compact('registration');
-        return view('registration/regStatus')->with($data); 
+        // return view('registration/regStatus')->with($data); 
+        $checkStat = DB::table('registrations')->where('student_id', Auth::guard('student')->user()->id)->exists();
+        if($checkStat == false)
+        {
+            $notification = array("message"=>"Apply for registration first!!","alert-type"=>"success");
+            return redirect('/regFormOpen')->with($notification);
+        }else{
+            return view('registration/regStatus')->with($data); 
+        }
     }
     public function regFormOpen()
     {
